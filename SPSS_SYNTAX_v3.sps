@@ -1,10 +1,11 @@
 * ============================================================================.
-* ИСПРАВЛЕННЫЙ СИНТАКСИС SPSS v3.2.
+* ИСПРАВЛЕННЫЙ СИНТАКСИС SPSS v3.3.
 * Эмоциональная идентификация у младших школьников с ЗПР.
 * ============================================================================.
-* ИЗМЕНЕНИЯ v3.2:
-* 1. СЕМАГО: все 0→1 в YEO, UD, GV (по оригиналу Семаго шкала 1-3)
-*    ID: 27, 29, 32, 36, 40, 42, 46
+* ИЗМЕНЕНИЯ v3.3:
+* - Укорочены все TITLE (лимит SPSS: 60 символов)
+* ИЗ v3.2:
+* - СЕМАГО: все 0→1 в YEO, UD, GV (шкала 1-3)
 * ИЗ v3.1:
 * - BSS в норме ID6: 2→1
 * - СОЦИОМЕТРИЯ переделана для разных референтных групп
@@ -157,27 +158,27 @@ EXECUTE.
 SORT CASES BY Group.
 SPLIT FILE BY Group.
 
-TITLE 'Описательная статистика: Анкета педагогу'.
+TITLE 'Статистика: Анкета'.
 DESCRIPTIVES VARIABLES=Express UnderstandSelf UnderstandOthers Friends
   /STATISTICS=MEAN STDDEV MIN MAX.
 
-TITLE 'Описательная статистика: Эмоциональная пиктограмма'.
+TITLE 'Статистика: Пиктограмма'.
 DESCRIPTIVES VARIABLES=RE V UOZ EO FEN
   /STATISTICS=MEAN STDDEV MIN MAX.
 
-TITLE 'Описательная статистика: Эмоциональные лица (Семаго)'.
+TITLE 'Статистика: Семаго'.
 DESCRIPTIVES VARIABLES=AO YEO UD GV
   /STATISTICS=MEAN STDDEV MIN MAX.
 
-TITLE 'Описательная статистика: КРС'.
+TITLE 'Статистика: КРС'.
 DESCRIPTIVES VARIABLES=BSS Anxiety Conflict Inferiority Hostility
   /STATISTICS=MEAN STDDEV MIN MAX.
 
-TITLE 'Описательная статистика: Незаконченные предложения'.
+TITLE 'Статистика: Предложения'.
 DESCRIPTIVES VARIABLES=Mama Father Siblings Family Peers School People Abilities Negative Dreams Illness
   /STATISTICS=MEAN STDDEV MIN MAX.
 
-TITLE 'Описательная статистика: Социометрия'.
+TITLE 'Статистика: Социометрия'.
 DESCRIPTIVES VARIABLES=LichPlus LichMinus PoznPlus PoznMinus LichStatus PoznStatus TotalStatus
   /STATISTICS=MEAN STDDEV MIN MAX.
 
@@ -187,14 +188,14 @@ SPLIT FILE OFF.
 * РАСПРЕДЕЛЕНИЕ УРОВНЕЙ ПО СЕМАГО.
 * ============================================================================.
 
-TITLE 'Распределение уровней по Семаго: АО'.
+TITLE 'Уровни Семаго: АО'.
 CROSSTABS
   /TABLES=AO_Level BY Group
   /FORMAT=AVALUE TABLES
   /STATISTICS=CHISQ
   /CELLS=COUNT ROW COLUMN TOTAL.
 
-TITLE 'Распределение уровней по Семаго: ЯЭО, УД, ГВ'.
+TITLE 'Уровни Семаго: ЯЭО, УД, ГВ'.
 CROSSTABS
   /TABLES=YEO_Level UD_Level GV_Level BY Group
   /FORMAT=AVALUE TABLES
@@ -205,37 +206,37 @@ CROSSTABS
 * U-КРИТЕРИЙ МАННА-УИТНИ.
 * ============================================================================.
 
-TITLE 'Критерий Манна-Уитни: Анкета педагогу'.
+TITLE 'Манна-Уитни: Анкета'.
 NPAR TESTS
   /M-W= Express UnderstandSelf UnderstandOthers Friends BY Group(1 2)
   /STATISTICS=DESCRIPTIVES
   /MISSING ANALYSIS.
 
-TITLE 'Критерий Манна-Уитни: Эмоциональная пиктограмма'.
+TITLE 'Манна-Уитни: Пиктограмма'.
 NPAR TESTS
   /M-W= RE V UOZ EO FEN BY Group(1 2)
   /STATISTICS=DESCRIPTIVES
   /MISSING ANALYSIS.
 
-TITLE 'Критерий Манна-Уитни: Эмоциональные лица (Семаго)'.
+TITLE 'Манна-Уитни: Семаго'.
 NPAR TESTS
   /M-W= AO YEO UD GV BY Group(1 2)
   /STATISTICS=DESCRIPTIVES
   /MISSING ANALYSIS.
 
-TITLE 'Критерий Манна-Уитни: КРС'.
+TITLE 'Манна-Уитни: КРС'.
 NPAR TESTS
   /M-W= BSS Anxiety Conflict Inferiority Hostility BY Group(1 2)
   /STATISTICS=DESCRIPTIVES
   /MISSING ANALYSIS.
 
-TITLE 'Критерий Манна-Уитни: Незаконченные предложения'.
+TITLE 'Манна-Уитни: Предложения'.
 NPAR TESTS
   /M-W= Mama Father Siblings Family Peers School People Abilities Negative Dreams Illness BY Group(1 2)
   /STATISTICS=DESCRIPTIVES
   /MISSING ANALYSIS.
 
-TITLE 'Критерий Манна-Уитни: Социометрия'.
+TITLE 'Манна-Уитни: Социометрия'.
 NPAR TESTS
   /M-W= LichPlus LichMinus PoznPlus PoznMinus LichStatus PoznStatus TotalStatus BY Group(1 2)
   /STATISTICS=DESCRIPTIVES
@@ -250,7 +251,7 @@ VARIABLE LABELS StatusCat 'Категория социометрического
 VALUE LABELS StatusCat 1 'Низкий (отвергаемые)' 2 'Средний (принятые)' 3 'Высокий (популярные)'.
 EXECUTE.
 
-TITLE 'Критерий Хи-квадрат/Фишера: Социометрический статус'.
+TITLE 'Хи-квадрат: Соц. статус'.
 CROSSTABS
   /TABLES=StatusCat BY Group
   /FORMAT=AVALUE TABLES
@@ -263,7 +264,7 @@ CROSSTABS
 * ============================================================================.
 
 * Корреляции для группы ЗПР.
-TITLE 'Корреляции Спирмена: Группа ЗПР'.
+TITLE 'Спирмен: ЗПР'.
 USE ALL.
 COMPUTE filter_zpr=(Group=2).
 FILTER BY filter_zpr.
@@ -279,7 +280,7 @@ NONPAR CORR
 FILTER OFF.
 
 * Корреляции для группы Нормы.
-TITLE 'Корреляции Спирмена: Группа Норма'.
+TITLE 'Спирмен: Норма'.
 USE ALL.
 COMPUTE filter_norm=(Group=1).
 FILTER BY filter_norm.
@@ -295,7 +296,7 @@ NONPAR CORR
 FILTER OFF.
 
 * Общие корреляции.
-TITLE 'Корреляции Спирмена: Общая выборка (N=50)'.
+TITLE 'Спирмен: Общая (N=50)'.
 USE ALL.
 NONPAR CORR
   /VARIABLES=Express UnderstandSelf UnderstandOthers Friends
@@ -312,7 +313,7 @@ NONPAR CORR
 * ПРОВЕРКА НОРМАЛЬНОСТИ.
 * ============================================================================.
 
-TITLE 'Проверка нормальности (Шапиро-Уилка)'.
+TITLE 'Шапиро-Уилка: Нормальность'.
 EXAMINE VARIABLES=RE V UOZ AO BSS Anxiety LichStatus TotalStatus BY Group
   /COMPARE GROUPS
   /STATISTICS DESCRIPTIVES
